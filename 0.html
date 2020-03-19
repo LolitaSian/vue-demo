@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				background-color: #FFFEFA;
+			}
+			a{
+				text-decoration: none;
+				color: black;
+			}
+			#main{
+				width: 300px;
+				border: solid #ccc 1px;
+				margin: 50px auto;
+				box-shadow: #F2EEEE 1px 1px 5px;
+				background-color: white;
+				border-radius: 5px;
+				font-size: 17px;
+			}
+			#head{
+				text-align: center;
+				line-height: 50px;
+			}
+			#head input{
+				line-height: 40px;
+				width: 270px;
+				border: 1px #ccc solid;
+				padding: 0 15px;
+				margin: 10px 0 0-1px;
+				font-size: 17px;
+			}
+			#mid ul{
+				margin: 0;
+				padding: 0;
+			}
+			#mid li{
+				padding: 0 15px;
+				border-bottom: 1px #ccc solid;
+				line-height: 40px;
+				list-style-type: none;
+			}
+			#mid li .close{
+				float: right;
+				display: none;
+			}
+			#mid li:hover .close{
+				display: inherit;
+			}
+			#foot{
+				height: 30px;
+				position: relative;
+			}
+			#fb1 , #fb2 , #fb3{
+				margin:0 auto;
+				position: absolute;
+				background-color: white;
+			}
+			#fb1{
+				border: 1px #ccc solid;
+				height: 35px;
+				width: 290px;
+				left:5px;
+				box-shadow: #F2EEEE 1px 1px 5px;
+			}
+			#fb2{
+				border: 1px #ccc solid;
+				height: 32px;
+				width: 294px;
+				left:2px;
+			}
+			#fb3{
+				border-bottom:1px #ccc solid;
+				height: 30px;
+				width: 280px;
+				padding: 0 10px;
+			}
+			.left{
+				float: left;
+				font-size: 10px;
+				line-height: 30px;
+			}
+			.right{
+				float: right;
+				font-size: 10px;
+				line-height: 30px;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<section id="main">
+			<header id="head">
+				Sian的第一个Vue小玩意儿
+				<input type="text" autofocus="autofocus" v-model ="value" @keyup.enter="inpt" :placeholder="start"/>
+			</header>
+			<section id="mid">
+				<ul>
+					<li v-for="(item,index) in list">
+						<span class="index">{{index+1}}.　</span>
+						<label>{{item}}</label>
+						<a class="close" @click="remove(index)" href="javascript:;">×</a>
+					</li>
+				</ul>
+			</section>
+			<footer id="foot">
+				<div id="fb1"></div>
+				<div id="fb2"></div>
+				<div id="fb3">
+					<span class="left" v-show="list.length!=0">
+						<strong>{{list.length+" "}} </strong>items left
+						</span>
+					<a class="right" @click="clear" href="javascript:;">清空</a>
+				</div>
+			</footer>
+		</section>
+		
+		<script type="text/javascript">
+			var app = new Vue({
+				el:'#main',
+				data:{
+					list:["吃饭饭","睡觉觉","打豆豆"],
+					start:"请输入",
+					value:"",
+				},
+				methods:{
+					inpt:function(){
+						this.list.push(this.value);
+					},
+					remove:function(index){
+						this.list.splice(index,1); //删除index位置的一个
+					},
+					clear:function(){
+						this.list=[];
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
