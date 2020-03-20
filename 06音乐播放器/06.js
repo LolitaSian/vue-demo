@@ -2,8 +2,8 @@ window.onload = function() {
 	var app = new Vue({
 		el: "#player",
 		data: {
-			query: "", //查询信息
-			munsicList: [],
+			query: "不才", //查询信息
+			musicList: [],
 			musicUrl:"",
 			videoUrl:"",
 			comment:[],
@@ -17,7 +17,7 @@ window.onload = function() {
 				var that = this;
 				axios.get("https://autumnfish.cn/search?keywords=" + this.query)
 					.then(function(response) {
-							that.munsicList = response.data.result.songs;
+							that.musicList = response.data.result.songs;
 						},
 						function(err) {})
 			},
@@ -37,7 +37,6 @@ window.onload = function() {
 				//获取评论
 				axios.get("https://autumnfish.cn/comment/hot?type=0&id="+id)
 				.then(function(response){
-					console.log(response.data.hotComments);
 					that.comment = response.data.hotComments;
 				},function(err){})
 			},
@@ -63,6 +62,9 @@ window.onload = function() {
 				this.isMv=false;
 				this.videoUrl="";
 			}
-		}
+		},
+			mounted(){
+				this.searchMusic();
+			}
 	})
 }

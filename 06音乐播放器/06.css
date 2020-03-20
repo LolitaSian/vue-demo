@@ -44,6 +44,7 @@
 	border: 0px;
 	background: url("images/zoom.png") 265px center no-repeat rgba(255, 255, 255, 0.45);
 	text-indent: 15px;
+	flex-shrink: 1;
 	outline: none;
 }
 
@@ -187,7 +188,17 @@
 	margin-top: 10px;
 	line-height: 18px;
 }
-
+.introduction{
+	color: #333;
+	padding: 0 10px;
+	line-height: 200%;
+}
+.introduction p:last-child{
+	text-align: center;
+}
+.introduction i{
+	padding: 0 10px;
+}
 .audio_con {
 	height: 50px;
 	background-color: #f1f3f4;
@@ -281,5 +292,5 @@
 	left: 0;
 	top: 0;
 	z-index: 980;
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgba(0, 0, 0, 0.5);
 }
