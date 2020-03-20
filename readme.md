@@ -43,7 +43,23 @@ vue会管理`el`命中的元素及其内部的子元素。
 
 ### Vue指令
 
-vue指令是以`v-`开头的一组特殊语法。
+####  `v-cloak`
+
+这个指令保持在元素上直到关联实例结束编译。和 CSS 规则如 `[v-cloak] { display: none }` 一起用时，这个指令可以隐藏未编译的 Mustache 标签直到实例准备完毕。就是解决页面刷新和页面加载会出现插值表达式的问题。
+
+```css
+/*在css中加上这段，注意css要是link引入的*/
+[v-cloak] {
+  display: none;
+}
+```
+
+```html
+<!--在html挂载元素上加上这个-->
+<div v-cloak>
+  {{ message }}
+</div>
+```
 
 #### `v-text` 
 

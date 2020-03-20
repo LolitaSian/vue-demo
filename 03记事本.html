@@ -4,6 +4,9 @@
 		<meta charset="utf-8">
 		<title></title>
 		<style type="text/css">
+			[v-cloak] {
+			    display: none!important;
+			}
 			body{
 				background-color: #FFFEFA;
 			}
@@ -91,7 +94,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	</head>
 	<body>
-		<section id="main">
+		<section id="main" v-cloak>
 			<header id="head">
 				Sian的第一个Vue小玩意儿
 				<input type="text" autofocus="autofocus" v-model ="value" @keyup.enter="inpt" :placeholder="start"/>
