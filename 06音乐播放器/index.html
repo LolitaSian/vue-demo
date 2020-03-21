@@ -42,7 +42,7 @@
 					<!-- 评论容器 -->
 					<div class="comment_wrapper">
 						<h5 class="title" v-show="comment.length!=0">热门评论</h5>
-						<div v-if="comment.length!=0" class="comment_list">
+						<div v-show="comment.length!=0" class="comment_list">
 							<dl v-for="item in comment">
 								<dt><img :src="item.user.avatarUrl" alt=""></dt>
 								<dd class="name">{{item.user.nickname}}</dd>
@@ -50,7 +50,7 @@
 								<dd class="detail">{{item.content}}</dd>
 							</dl>
 						</div>
-						<div class="introduction">
+						<div v-show="comment.length==0" class="introduction">
 							<h3>使用说明</h3>
 							<p>搜索栏输入关键字即可查询歌曲</p>
 							<p>点击歌曲左侧按钮即可播放歌曲</p>

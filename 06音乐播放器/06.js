@@ -2,7 +2,7 @@ window.onload = function() {
 	var app = new Vue({
 		el: "#player",
 		data: {
-			query: "不才", //查询信息
+			query: "Oskar Schuster", //查询信息
 			musicList: [],
 			musicUrl:"",
 			videoUrl:"",
