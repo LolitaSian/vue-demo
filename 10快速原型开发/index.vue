@@ -69,5 +69,5 @@ export default {
 </script>
 
 <style>
-@import url('./05.css');
+@import url('./10.css');
 </style>
