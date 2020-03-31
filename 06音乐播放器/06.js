@@ -4,6 +4,7 @@ window.onload = function() {
 		data: {
 			query: "Oskar Schuster", //查询信息
 			musicList: [],
+			newList:[],
 			musicUrl:"",
 			videoUrl:"",
 			comment:[],
@@ -21,6 +22,10 @@ window.onload = function() {
 						},
 						function(err) {})
 			},
+			// newMusic:function(){
+			// 	axios.get("https://autumnfish.cn/personalized/newsong")
+			// 	.then(response=>{console.log(response)})
+			// },
 			playMusic: function(id) {
 				this.player1="images/player_bar.png";
 				var that = this;
@@ -65,6 +70,7 @@ window.onload = function() {
 		},
 			mounted(){
 				this.searchMusic();
+				// this.newMusic()
 			}
 	})
 }
