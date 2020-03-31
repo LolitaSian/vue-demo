@@ -299,32 +299,13 @@ vue会管理`el`命中的元素及其内部的子元素。
 ```
 ## Cli
 
-### 创建项目
-
-`vue init webpack 项目名`
-
-- ? Project name ：项目名
-- ? Project description ：描述
-- ? Author：作者
-- ? Vue build：回车默认 standalone
-- ? Install vue-router? ：回车默认Yes
-- ? Use ESLint to lint your code? ：<font color=red>输入No</font>
-- ? Set up unit tests ：回车默认yes
-- ? Pick a test runner ：回车默认jest
-- ? Setup e2e tests with Nightwatch? ：回车默认Yes
-- ? Should we run npm install for you after the project has been created? (recommended) ：回车默认npm
-
-`npm run dev`执行
-
-
-
-### 页面跳转和子路由
+### 页面跳转
 
 建好项目之后，进入目录的`src-->component`在这个文件夹中新建.vue的文件。
 
 然后去`src-->router`文件夹下打开index.js
 
-将文件引入：`import 变量名 from '@/components/文件名(.vue写不写都行)`
+将文件引入：`import 变量名 from '@/components/文件名`
 
 - 变量名默认大写
 - 文件名就是你新建的文件的名字
@@ -337,56 +318,16 @@ vue会管理`el`命中的元素及其内部的子元素。
     }
 ```
 
-打开新建的文件
-
-```html
-<template>
-  <div>
-      template中一定要加一个div再写其他的东西
-  </div>
-</template>
-```
-
-------
-
-根页面
-
 ```vue
 <template>
   <div>
-    <router-link to="/father">我是父页面1father</router-link>
+    <router-link to="/children"></router-link> 
+      //相当于<a>
+    <router-view></router-view> 
+      //路由挂载点，想要将页面显示在哪部分就写在哪部分
   </div>
 </template>
 ```
-
-根页面跳转到一级页面
-
-```vue
-<template>
-  <div>
-    <p>我是父页面father</p>
-    <p>
-        <router-link to="/children">转向子页面</router-link> 
-    </p>
-    <p><router-link to="/">返回</router-link> </p> //返回根
-    <router-view></router-view> //一定要写挂载点
-  </div>
-</template>
-```
-
-子页面
-
-```vue
-<template>
-  <div>
-    <p>我是子页面children</p>
-    <p><router-link to="/father">返回上一级</router-link> </p>
-    <p><router-link to="/">返回首页</router-link></p>
-  </div>
-</template>
-```
-
-index.js页面中：
 
 ```js
 //实现无覆盖和完全覆盖
@@ -410,27 +351,17 @@ index.js页面中：
       }
 ```
 
-```js
-//保留根页面内容，覆盖只会覆盖父页面，不会覆盖根页面内容
-routes: [{
-    path: '/',
-    component: MyFirstVue,
-    children: [{
-        path: '/father',
-        component: Father, 
-        children: [ 
-          {
-            path: '/children1',
-            component: Children1
-          }
-        ]
-      },
-      { 
-        path: '/children2',
-        component: Children2
-      }
-    ]
+### 页面传参
+
+```javascript
+this.$router.push('路径?value = xxx')
+//可以用代码实现跳转
+
+//组件的页面中通过this.$route.query 即可访问到对应的value
+
 ```
+
+
 
 ### 修改路由模式
 
