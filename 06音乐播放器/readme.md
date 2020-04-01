@@ -1,10 +1,16 @@
 pages：<https://lolitaann.gitee.io/player/>点开看看！！！(•͈ᴗ•͈ૢૢ)❊⿻*
 
-本来打算直接上手搞cli的，但是看了官方文档，建议新手还是不要直接cli，所以我先用script引入搞了一个练手。
+我会加油的！！！gitee只传 1.0 的源码，所有的源码都在github上
 
-想实现的功能太多，需要的接口没搞到，所以功能也不是很齐全。
+# 页面预览
+### 音乐播放器1.0 
+![](https://gitee.com/LolitaAnn/player/raw/master/images/1.1.png)
 
-带哥说”动效有点生硬，加个transition试试“，等我以后有空加上！！！
+![](https://gitee.com/LolitaAnn/player/raw/master/images/1.2.png)
 
-我会加油的！！！
+### 播放器2.0
+![](https://gitee.com/LolitaAnn/player/raw/master/images/2.1.png)
+![](https://gitee.com/LolitaAnn/player/raw/master/images/2.2.png)
+![](https://gitee.com/LolitaAnn/player/raw/master/images/2.3.png)
+![](https://gitee.com/LolitaAnn/player/raw/master/images/2.4.png)
 

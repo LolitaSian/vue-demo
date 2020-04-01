@@ -1,6 +1,7 @@
 * {
 	margin: 0px;
 	padding: 0px;
+	transition: 0.3s;
 }
 [v-cloak] {
     display: none!important;
@@ -188,16 +189,49 @@
 	margin-top: 10px;
 	line-height: 18px;
 }
-.introduction{
+.newsong{
 	color: #333;
-	padding: 0 10px;
-	line-height: 200%;
+	padding: 0 5px;
+	height: 400px;
+	overflow: auto;
 }
-.introduction p:last-child{
+.newsong::-webkit-scrollbar{
+	display: none;
+}
+#newSonglist{
+	display: flex;
+	margin-bottom: 5px;
+}
+#newSonglist .songpic{
+	position: relative;
+}
+#newSonglist .songpic img{
+	width: 50px;
+	height: 50px;
+	padding-right: 10px;
+}
+#newSonglist .songcover{
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	left: 0px;
+	opacity: .5;
+	background-color: #000000;
+	display: none;
 	text-align: center;
 }
-.introduction i{
-	padding: 0 10px;
+#newSonglist .songcover a{
+	text-decoration: none;
+	color: #ffe1e4;
+	font-size: 20px;
+	margin-top: 15px;
+}
+#newSonglist .songpic:hover .songcover{
+	display:initial;
+}
+#newSonglist p{
+	font-size: 13px;
+	line-height: 20px;
 }
 .audio_con {
 	height: 50px;
