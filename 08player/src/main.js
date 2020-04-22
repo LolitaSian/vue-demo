@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-Vue.config.productionTip = false
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+Vue.use(ElementUI)
 
 //导入
 import VueRouter from 'vue-router'
@@ -38,9 +40,7 @@ let router = new VueRouter({
 	]
 })
 
-import ElementUi from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css';
-Vue.use(ElementUi)
+Vue.config.productionTip = false
 new Vue({
   render: h => h(App),
   router //挂载到vue实例上 是router:router的缩写

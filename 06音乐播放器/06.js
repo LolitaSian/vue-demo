@@ -20,7 +20,7 @@ window.onload = function() {
 		methods: {
 			searchMusic: function() {
 				var that = this;
-				axios.get("http://musicapi.leanapp.cn/search?keywords=" + this.query)
+				axios.get("https://autumnfish.cn/search?keywords=" + this.query)
 					.then(response => {
 							that.musicList = response.data.result.songs;
 						},
@@ -28,7 +28,7 @@ window.onload = function() {
 			},
 			//获取最新歌曲
 			newMusic: function() {
-				axios.get("http://musicapi.leanapp.cn/personalized/newsong")
+				axios.get("https://autumnfish.cn/personalized/newsong")
 					.then(response => {
 						console.log(response.data.result)
 						this.newList = response.data.result

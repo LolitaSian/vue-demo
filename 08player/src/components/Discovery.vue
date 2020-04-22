@@ -1,7 +1,7 @@
 <template>
 	<div class="discovery-container">
 		<!-- 轮播图 -->
-		<el-carousel class="" :interval="4000" type="card">
+		<el-carousel class="" :interval="3000" type="card">
 			<el-carousel-item v-for="(item,index) in banners" :key="index">
 				<img :src="item.imageUrl" alt="" />
 			</el-carousel-item>

@@ -29,22 +29,41 @@
 	</head>
 	<body>
 		<div id="test">
-			<button id="left" type="button" @click="sub"> - </button>
-			<button id="mid" type="button"> {{num}} </button>
-			<button id="right" type="button" @click="add"> + </button>
+			<div id="">
+				<button id="left" type="button" @click="sub"> - </button>
+				<button id="mid" type="button"> {{num}} </button>
+				<button id="right" type="button" @click="add"> + </button>
+			</div>
+			<div v-if="num===0">购物车空</div>
+			<ul v-for="i in arr" :key="i" v-else>
+				<li>{{"商品："+i}}</li>
+			</ul>
+
 		</div>
 		<script type="text/javascript">
 			var app = new Vue({
 				el: '#test',
 				data: {
-					num: 1
+					num: 0,
+					arr: []
 				},
 				methods: {
-					add:function(){
-						return this.num++;
+					add: function() {
+						if (this.num >= 10) {
+							alert("不能大于10")
+						} else {
+							this.arr.push(++this.num);
+							return this.num
+						}
 					},
-					sub:function(){
-						return this.num--;
+					sub: function() {
+
+						if (this.num === 0) {
+							alert("不能再减少了")
+						} else {
+							this.arr.pop();
+							return this.num--;
+						}
 					}
 				}
 			})
