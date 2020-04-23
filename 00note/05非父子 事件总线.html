@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<author></author>
+			<user></user>
+		</div>
+		<script>
+			var bus = new Vue()
+			Vue.component('author',{
+				template:`
+				<div>
+					<input type="text" ref="article" />
+					<input type="button" value="发布" @click="trans()"/>
+				</div>`,
+				methods:{
+					trans(){
+						bus.$emit("message",this.$refs.article.value)
+					}
+				}
+			})
+			Vue.component('user',{
+				template:`
+				<div>我是用户</div>
+				`,
+				mounted() {
+					bus.$on("message", (data) => {
+						console.log("收到推送了", data)
+					})
+				}
+			})
+			new Vue({
+				el:"#app"
+			})
+		</script>
+	</body>
+</html>

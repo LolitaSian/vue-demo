@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<input type="checkbox" @click="change()" v-model="isChecked"/>全选/全不选
+			<br />
+			<input type="checkbox" value="足球" v-model="check" @change="flag()"/>足球
+			<input type="checkbox" value="篮球" v-model="check" @change="flag()"/>篮球
+			<input type="checkbox" value="羽毛球" v-model="check" @change="flag()"/>羽毛球
+			<input type="checkbox" value="乒乓球" v-model="check" @change="flag()"/>乒乓球
+		</div>
+		<script>
+			var vue = new Vue({
+				el: "#app",
+				data: {
+					check: [],
+					data: ["足球", "篮球", "羽毛球", "乒乓球"],
+					isChecked: false,
+				},
+				methods: {
+					change() {
+						this.isChecked = !this.isChecked
+						if (this.isChecked) {
+							this.check = this.data
+						} else {
+							this.check = []
+						}
+					},
+					flag() {
+						if (this.check.length === this.data.length) {
+							this.isChecked = true
+						} else {
+							this.isChecked = false
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

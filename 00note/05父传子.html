@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="demo">
+			<top tips="tip" :isshow="true"></top>
+			<top :isshow="false"></top>
+		</div>
+		<script type="text/javascript">
+			Vue.component("top", {
+				template: `
+				<div>
+				<button @click='count++' >
+					clicked me {{ count }} times. 	
+				</button>
+				<p v-show="isshow">{{tips}}</p>
+				</div>
+				`,
+				props: ['tips', 'isshow'],
+				data() {
+					return {
+						count: 0
+					}
+				}
+			})
+			new Vue({
+				el: '#demo'
+			})
+		</script>
+	</body>
+</html>

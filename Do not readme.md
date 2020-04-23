@@ -63,6 +63,40 @@ vue会管理`el`命中的元素及其内部的子元素。
 
 注意，**不应该使用箭头函数来定义 method 函数**，箭头函数绑定了父级作用域的上下文，所以 `this` 将不会按照期望指向 Vue 实例，`this.a` 将是 undefined。
 
+#### [computed](https://cn.vuejs.org/v2/api/#computed)/计算属性
+
+**类型**：`{ [key: string]: Function | { get: Function, set: Function } }`
+
+计算属性将被混入到 Vue 实例中。所有 getter 和 setter 的 this 上下文自动地绑定为 Vue 实例。
+
+注意如果你为一个计算属性使用了箭头函数，则 `this` 不会指向这个组件的实例，不过你仍然可以将其实例作为函数的第一个参数来访问。
+
+```
+  computed: {
+    aDouble: vm => vm.a * 2
+  }
+```
+
+计算属性的结果会被缓存，除非依赖的响应式属性变化才会重新计算。注意，如果某个依赖 (比如非响应式属性) 在该实例范畴之外，则计算属性是**不会**被更新的。
+与普通方法相比较：在一个页面中多处使用普通方法，触发事件普通方法会多次调用。但是计算属性只会调用一次，然后将结果缓存。
+
+
+#### [props](https://cn.vuejs.org/v2/api/#props)
+
+**类型**：`Array | Object`
+
+**接收来自父组件的数据**。
+
+- props 可以是简单的数组
+- 或者使用对象作为替代，对象允许配置高级选项，如类型检测、自定义验证和设置默认值。你可以基于对象的语法使用以下选项：
+    - `type`：可以是下列原生构造函数中的一种：`String`、`Number`、`Boolean`、`Array`、`Object`、`Date`、`Function`、`Symbol`、任何自定义构造函数、或上述内容组成的数组。会检查一个 prop 是否是给定的类型，否则抛出警告。Prop 类型的[更多信息在此](https://cn.vuejs.org/v2/guide/components-props.html#Prop-类型)。
+    - `default`：`any`
+      为该 prop 指定一个默认值。如果该 prop 没有被传入，则换做用这个值。对象或数组的默认值必须从一个工厂函数返回。
+    - `required`：`Boolean`
+      定义该 prop 是否是必填项。在非生产环境中，如果这个值为 truthy 且该 prop 没有被传入的，则一个控制台警告将会被抛出。
+    - `validator`：`Function`
+      自定义验证函数会将该 prop 的值作为唯一的参数代入。在非生产环境下，如果该函数返回一个 falsy 的值 (也就是验证失败)，一个控制台警告将会被抛出。你可以在[这里](https://cn.vuejs.org/v2/guide/components-props.html#Prop-验证)查阅更多 prop 验证的相关信息。
+
 ***
 
 ### 指令
@@ -181,11 +215,11 @@ v-if 根据元素的真假切换元素的显示状态，实际是操作dom树。
 
 - `.stop` - 调用 `event.stopPropagation()`。
 - `.prevent` - 调用 `event.preventDefault()`。
-- `.capture` - 添加事件侦听器时使用 capture 模式。
+- `.once` - 只触发一次回调。
 - `.self` - 只当事件是从侦听器绑定的元素本身触发时才触发回调。
+- `.capture` - 添加事件侦听器时使用 capture 模式。
 - `.{keyCode | keyAlias}` - 只当事件是从特定键触发时才触发回调。
 - `.native` - 监听组件根元素的原生事件。
-- `.once` - 只触发一次回调。
 - `.left` - (2.2.0) 只当点击鼠标左键时触发。
 - `.right` - (2.2.0) 只当点击鼠标右键时触发。
 - `.middle` - (2.2.0) 只当点击鼠标中键时触发。
@@ -211,29 +245,59 @@ v-if 根据元素的真假切换元素的显示状态，实际是操作dom树。
 
 获取和设置表单元素的值（双向数据绑定：解析之后表单元素会直接显示data的值，更改表单元素data的数据也会改变）
 
-```html
-	<div id="app">
-		<input type="text" v-model="message" @keyup.enter="getMsg">
-		<input type="button" value="点我更改" @click="setMsg">
-		<h3>{{message}}</h3>
-	</div>
-	<script>
-		var app = new Vue({
-			el: "#app",
-			data:{
-				message:"aaaa"
-			},
-			methods:{
-				getMsg:function(){			//获取表单元素值
-					alert(this.message);
-				},
-				setMsg:function(){			//设置表单元素值
-					this.message="hhahaa"
-				}
-			}
-		})
-	</script>
-```
+- **预期**：随表单控件类型不同而不同。
+- **限制**：
+  - `<input>`
+  - `<textarea>`
+  - `<select>`
+  - components
+- **修饰符**：
+  - [`.lazy`](https://cn.vuejs.org/v2/guide/forms.html#lazy) - 取代 `input` 监听 `change` 事件
+  - [`.number`](https://cn.vuejs.org/v2/guide/forms.html#number) - 输入字符串转为有效的数字
+  - [`.trim`](https://cn.vuejs.org/v2/guide/forms.html#trim) - 输入首尾空格过滤
+
+
+
+#### 补充
+
+##### key
+
+- **预期**：`number | string`
+
+  `key` 的特殊属性主要用在 Vue 的虚拟 DOM 算法，在新旧 nodes 对比时辨识 VNodes。如果不使用 key，Vue 会使用一种最大限度减少动态元素并且尽可能的尝试就地修改/复用相同类型元素的算法。而使用 key 时，它会基于 key 的变化重新排列元素顺序，并且会移除 key 不存在的元素。
+
+  有相同父元素的子元素必须有**独特的 key**。重复的 key 会造成渲染错误。
+
+  最常见的用例是结合 `v-for`：
+
+  ```
+  <ul>
+    <li v-for="item in items" :key="item.id">...</li>
+  </ul>
+  ```
+
+  它也可以用于强制替换元素/组件而不是重复使用它。当你遇到如下场景时它可能会很有用：
+
+  - 完整地触发组件的生命周期钩子
+  - 触发过渡
+
+#####  [ref](https://cn.vuejs.org/v2/api/?#ref)
+
+- **预期**：`string`
+
+  `ref` 被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 `$refs` 对象上。如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素；如果用在子组件上，引用就指向组件实例：
+
+  ```
+  <!-- `vm.$refs.p` will be the DOM node -->
+  <p ref="p">hello</p>
+  
+  <!-- `vm.$refs.child` will be the child component instance -->
+  <child-component ref="child"></child-component>
+  ```
+
+  当 `v-for` 用于元素或组件的时候，引用信息将是包含 DOM 节点或组件实例的数组。
+
+  关于 ref 注册时间的重要说明：因为 ref 本身是作为渲染结果被创建的，在初始渲染的时候你不能访问它们 - 它们还不存在！`$refs` 也不是响应式的，因此你不应该试图用它在模板中做数据绑定。
 
 ## 实例方法/数据
 
@@ -270,7 +334,18 @@ v-if 根据元素的真假切换元素的显示状态，实际是操作dom树。
 
   注意：在变异 (不是替换) 对象或数组时，旧值将与新值相同，因为它们的引用指向同一个对象/数组。Vue 不会保留变异之前值的副本。
 
+## 实例方法 / 事件
 
+### 1.emit
+
+ [`emit( eventName, […args] )`](https://cn.vuejs.org/v2/api/?#vm-emit)
+
+   - **参数**：
+
+     - `{string} eventName`
+     - `[...args]`
+
+     触发当前实例上的事件。附加参数都会传给监听器回调。
 
 ## 简单的小功能
 
@@ -374,7 +449,38 @@ v-if 根据元素的真假切换元素的显示状态，实际是操作dom树。
 
 ​	见01加减按钮
 
-### 3.
+### 3.axios/fetch
+
+**fetch**：W3C的标准
+
+```js
+fetch("文件地址").then(res=>{
+    return res.json()		//第一个不是返回json的内容，而是返回获取文件状态
+}).then(res=>{				//需要使用第二个fetch获取json内容
+    console.log(res)
+})
+
+fetch("文件地址").then(res => res.json()).then(res => {}) //简写
+```
+
+
+
+**axios**：
+
+```javascript
+axios.get("文件地址").then(res => {...})
+```
+
+### 4.父子组件之间的传播
+
+父传子使用`props`，例如组件top，在top上添加属性，然后使用props传递属性，top的template中就可以使用数据。
+
+子传父
+
+- 使用`$emit`，例如组件child，在child中添加方法this.$emit(事件名称, 要传递的数据)，然后在child中使用该方法，child的template中触发该方法，child中也会接受到数据。
+- 使用`ref`，子组件中使用ref，父标签就可以使用$refs访问到所有添加了res属性的子组件。
+
+
 
 
 

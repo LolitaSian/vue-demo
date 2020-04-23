@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="demo">
+			<top></top>
+		</div>
+		<script type="text/javascript">
+			Vue.component("top", {
+				template: `
+				<div>
+					<input ref="mydemo1"/>
+					<p ref="mydemo2">ppp</p>
+					<button @click='res()'>click me</button>
+					<p >{{str}}</p>
+				</div>
+				`,
+				data() {
+					return {
+						str:''
+					}
+				},
+				methods:{
+					res(){
+						console.log(this.$refs)
+					}
+				}
+			})
+			new Vue({
+				el: '#demo'
+			})
+		</script>
+	</body>
+</html>

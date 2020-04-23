@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<input v-model="input" />
+			<ul v-for="i in newArr">
+				<li>{{i}}</li>
+			</ul>
+		</div>
+		<script>
+			//计算属性
+			new Vue({
+				el: "#app",
+				data: {
+					input: '',
+					arr: ["aaa", "aca", "acd", "bbb", "cccc", "czd"]
+				},
+				computed:{
+					newArr(){
+						return this.arr.filter(i=>i.indexOf(this.input)>-1)
+					}
+				}
+			})
+			//普通写法
+			// new Vue({
+			// 	el: "#app",
+			// 	data: {
+			// 		input:'',
+			// 		arr:["aaa","aca","acd","bbb","cccc","czd"],
+			// 		newArr:[]
+			// 	},
+			// 	methods: {
+			// 		change: function() {
+			// 			this.newArr = this.arr.filter(i=>i.indexOf(this.input)>-1)
+			// 		}
+			// 	}
+			// })
+		</script>
+	</body>
+</html>

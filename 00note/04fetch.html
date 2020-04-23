@@ -6,22 +6,23 @@
 	</head>
 	<body>
 		<div id="app">
-			<input v-model="input" @input="change()"/>
-			<ul v-for="i in newArr">
-				<li>{{i}}</li>
+			<button type="button" @click="fetchMessage">点我</button>
+			<ul v-for="item in message">
+				<li>{{item.name}}</li>
 			</ul>
 		</div>
+
 		<script>
-			new Vue({
+			var vue = new Vue({
 				el: "#app",
 				data: {
-					input:'',
-					arr:["aaa","aca","acd","bbb","cccc","czd"],
-					newArr:[]
+					message:[]
 				},
 				methods: {
-					change: function() {
-						this.newArr = this.arr.filter(i=>i.indexOf(this.input)>-1)
+					fetchMessage() {
+						fetch("04.json").then(res => res.json()).then(res => {
+							this.message = res.result.songs
+						})
 					}
 				}
 			})

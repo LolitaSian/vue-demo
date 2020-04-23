@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<home></home>
+			<pic></pic>
+			<list></list>
+			
+			<component is="pic"></component>
+		</div>
+		<script>
+			
+			var vue = new Vue({
+				el: "#app",
+				components:{
+					"home":{
+						template:`<div>home</div>`
+					},
+					"list":{
+						template:`<div>list</div>`
+					},
+					"pic":{
+						template:`<div>pic</div>`
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

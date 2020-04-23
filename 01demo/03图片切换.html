@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.bder {
+				border: solid;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<img :src="imgArr[index]">
+			<a @click="pre">上一张</a>
+			<a @click="next">下一张</a>
+		</div>
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					imgArr: ["img/1.jpg", "img/2.jpg", "img/3.jpg", "img/4.jpg", "img/5.jpg", "img/6.jpg"],
+					index: 0
+				},
+				methods: {
+					next: function() {
+						if (this.index != this.imgArr.length - 1) {
+							this.index++;
+						} else {
+							alert("这是最后一张啦");
+						}
+					},
+					pre: function() {
+						if (this.index > 0) {
+							this.index--;
+						} else {
+							alert("往前没有啦");
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

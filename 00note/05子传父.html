@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="demo">
+			<top @printnum='print($event)'></top>
+		</div>
+		<script type="text/javascript">
+			// 1. 全局定义组件 (作用域隔离)
+			Vue.component("top", {
+				template: `
+				<div>
+					<button @click="trans()" >
+						clicked me
+					</button>
+				</div>
+				`,
+				data() {
+					return {
+						count: 0
+					}
+				},
+				methods:{
+					trans(){
+						this.$emit("printnum",++this.count)
+					}
+				}
+			})
+			new Vue({
+				el: '#demo',
+				methods:{
+					print(event){
+						console.log("子组件的数据：",event)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
