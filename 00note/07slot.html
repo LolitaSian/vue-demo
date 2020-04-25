@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<father>
+				<p>children</p>
+				<p slot="c1">children1</p>		
+				<p slot="c2">children2</p>
+				<slot></slot>
+			</father>
+		</div>
+		<script type="text/javascript">
+			Vue.component('father',{
+				template:`<div>
+				父组件
+				<slot>如果渲染模块中没有插入内容，就会使用slot的默认值“无内容”</slot>	
+				<slot name='c1'></slot>	//具名插槽
+				<slot name='c2'></slot>
+				</div>`
+			})
+			new Vue({
+				el:"#app",
+			})
+		</script>
+	</body>
+</html>

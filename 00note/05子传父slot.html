@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app" >
+			<father>
+				<button @click="isShow=!isShow">click</button>
+			</father>
+			<father v-show="isShow"></father>
+		</div>
+		<script>
+			Vue.component("father",{
+				template:`<div>
+				father
+				<slot></slot>
+				</div>`,
+				
+			})
+			var vue = new Vue({
+				el: "#app",
+				data(){
+					return {isShow:true}
+				}
+			})
+		</script>
+	</body>
+</html>

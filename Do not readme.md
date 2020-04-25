@@ -480,9 +480,13 @@ axios.get("文件地址").then(res => {...})
 - 使用`$emit`，例如组件child，在child中添加方法this.$emit(事件名称, 要传递的数据)，然后在child中使用该方法，child的template中触发该方法，child中也会接受到数据。
 - 使用`ref`，子组件中使用ref，父标签就可以使用$refs访问到所有添加了res属性的子组件。
 
+### 5.动态组件
 
-
-
+```html
+			<keep-alive>	//切换之后也保留组件
+				<component :is="name"></component>
+			</keep-alive>
+```
 
 ## Cli
 
